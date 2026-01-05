@@ -1,5 +1,7 @@
+// src/components/public/Projects.jsx
 import { useState, useEffect } from 'react';
 import { fetchProjects } from '../../utils/api';
+//import './Projects.css'; // Optional: for styling
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -11,11 +13,12 @@ const Projects = () => {
 
   const loadProjects = async () => {
     try {
-      const response = await fetchProjects();
-      setProjects(response.data);
+      const data = await fetchProjects(); // fetchProjects already returns response.data
+      setProjects(data);
     } catch (error) {
-      console.error('Error loading projects:', error);
-      // Fallback to default projects
+      console.error('Error loading projects:', error.message);
+
+      // Fallback projects if API fails
       setProjects([
         {
           title: 'E-Commerce Platform',
@@ -49,16 +52,16 @@ const Projects = () => {
     <section className="projects-section" id="projects">
       <h2 className="section-title">Featured Projects</h2>
       <div className="projects-container">
-        {projects.map((project, index) => (
-          <div className="project-card" key={index}>
+        {projects.map((project) => (
+          <div className="project-card" key={project.title}>
             <div className="project-image">{project.icon}</div>
             <div className="project-content">
               <h3>{project.title}</h3>
               <p>{project.description}</p>
               {project.technologies && (
                 <div className="project-tech">
-                  {project.technologies.map((tech, i) => (
-                    <span key={i} className="tech-tag">{tech}</span>
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className="tech-tag">{tech}</span>
                   ))}
                 </div>
               )}

@@ -1,5 +1,7 @@
+// src/components/public/Skills.jsx
 import { useState, useEffect } from 'react';
-import { fetchSkills } from '../../utils/api';
+import { fetchSkills } from '../../utils/api'; // Make sure path is correct
+//import './Skills.css'; // Optional: for styling
 
 const Skills = () => {
   const [skills, setSkills] = useState([]);
@@ -11,11 +13,12 @@ const Skills = () => {
 
   const loadSkills = async () => {
     try {
-      const response = await fetchSkills();
-      setSkills(response.data);
+      const data = await fetchSkills(); // fetchSkills already returns response.data
+      setSkills(data);
     } catch (error) {
-      console.error('Error loading skills:', error);
-      // Fallback to default skills if API fails
+      console.error('Error loading skills:', error.message);
+
+      // Fallback skills if API fails
       setSkills([
         { name: 'React.js', icon: '⚛️', category: 'frontend' },
         { name: 'Node.js', icon: '📗', category: 'backend' },
@@ -24,7 +27,7 @@ const Skills = () => {
         { name: 'JavaScript', icon: '📜', category: 'frontend' },
         { name: 'Python', icon: '🐍', category: 'backend' },
         { name: 'PostgreSQL', icon: '🐘', category: 'database' },
-        { name: 'Docker', icon: '🐳', category: 'devops' }
+        { name: 'Docker', icon: '🐳', category: 'devops' },
       ]);
     } finally {
       setLoading(false);
@@ -39,8 +42,8 @@ const Skills = () => {
     <section className="skills-section" id="skills">
       <h2 className="section-title">Technical Skills</h2>
       <div className="skills-grid">
-        {skills.map((skill, index) => (
-          <div className="skill-item" key={index}>
+        {skills.map((skill) => (
+          <div className="skill-item" key={skill.name}>
             <div className="skill-icon">{skill.icon}</div>
             <div className="skill-name">{skill.name}</div>
           </div>
