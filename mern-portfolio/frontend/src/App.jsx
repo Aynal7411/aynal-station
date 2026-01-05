@@ -23,9 +23,9 @@ const PublicLayout = () => {
   return (
     <div className="App">
       <div className="floating-shapes">
-        <div className="shape"></div>
-        <div className="shape"></div>
-        <div className="shape"></div>
+        <div className="shape">A</div>
+        <div className="shape">B</div>
+        <div className="shape">C</div>
       </div>
       <Navbar />
       <Hero />

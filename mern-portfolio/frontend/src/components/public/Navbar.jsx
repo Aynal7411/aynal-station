@@ -20,6 +20,8 @@ const Navbar = () => {
         <li><a onClick={() => scrollToSection('skills')}>Skills</a></li>
         <li><a onClick={() => scrollToSection('projects')}>Projects</a></li>
         <li><a onClick={() => scrollToSection('contact')}>Contact</a></li>
+        <li><a href="/auth/login" className="btn-login">Login</a></li>
+        <li><a href="/auth/register" className="btn-register">Register</a></li>
       </ul>
       <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
         <span></span>
@@ -30,4 +32,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar; 
